@@ -215,28 +215,39 @@ sudo command_to_run
 
 `Ubuntu 16.04` 服务器可以使用 `UFW` 防火墙来确保只允许连接到某些服务。我们可以使用它来简单的配置基本防火墙。
 
-不同的程序可以在安装时使用 `UFW` 注册其配置文件。这些配置文件允许 `UFW` 按名称管理这些程序。`OpenSSH` 是允许我们现在连接到我们服务器的服务，它在UFW上注册了一个配置文件。
+不同的程序可以在安装时使用 `UFW` 注册其配置文件。这些配置文件允许 `UFW` 按名称管理这些程序。`OpenSSH` 是允许我们现在连接到我们服务器的服务，它在 `UFW` 上注册了一个配置文件。
 
 你可以输入以下内容来看到：
 
+```shell
 sudo ufw app list
-Output
+
 Available applications:
   OpenSSH
-我们需要确保防火墙允许SSH连接，以便我们可以在下次重新登录。我们可以输入以下内容来允许这些连
+```
+我们需要确保防火墙允许 SSH 连接，以便我们可以在下次重新登录。我们可以输入以下内容来允许这些连接
 
+```shell
 sudo ufw allow OpenSSH
+```
+
 之后，我们可以输入以下命令启用防火墙：
 
+```shell
 sudo ufw enable
-输入“y”并按ENTER继续。您可以通过键入以下内容来查看SSH连接：
+```
 
+输入 “y” 并按回车键继续。你可以通过输入以下命令来查看 SSH 连接：
+
+```shell
 sudo ufw status
-Output
+
 Status: active
 
 To                         Action      From
 --                         ------      ----
 OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
-如果您安装和配置其他服务，则需要调整防火墙设置以允许可接受的流量。您可以在本指南中了解一些常见的UFW操作。
+```
+
+如果你要安装其他的服务，就需要调整防火墙的配置运行端口暴露接收流量。
