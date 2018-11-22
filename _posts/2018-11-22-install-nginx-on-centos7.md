@@ -11,7 +11,7 @@ Nginx（Engine X 的缩写）是一个免费、开源、功能强大的 Web 服�
 
 在本文中，我们将介绍如何在 CentOS 7 服务器上安装、配置和管理 Nginx Web 服务器。
 
-# 准备条件
+# 先决条件
 
 - 一台 CentOS 7 的服务器
 - 提供一个可访问的静态 IP
@@ -76,7 +76,7 @@ http://SERVER_DOMAIN_NAME_OR_IP
 
 # Nginx 核心文件和目录
 
-- 默认服务器根目录（包含配置文件的顶级目录）：`/ etc/nginx`
-- 主要的 Nginx 配置文件：`/etc/nginx/nginx.conf`。
-- 可以在 `/etc/nginx/conf.d` 中添加服务器块（虚拟主机）配置。
-- 默认服务器文档根目录（包含Web文件）：`/usr/share/nginx/html`。
+- Nginx 目录（包含配置文件的根目录）：`/etc/nginx`
+- Nginx 主配置文件：`/etc/nginx/nginx.conf`。
+- 可以在 `/etc/nginx/conf.d` 中添加 server （虚拟主机）配置。
+- 默认欢迎页面目录：`/usr/share/nginx/html`。
