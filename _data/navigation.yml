@@ -1,0 +1,10 @@
+- title: 主页
+  url: /
+- title: 归档
+  url: /archives
+- title: 分类
+  url: /categories
+- title: Youtube
+  url: https://www.youtube.com/channel/UCmlhPmTdqYhRWwWZWSIBwGw
+- title: 搜索
+  url: /search

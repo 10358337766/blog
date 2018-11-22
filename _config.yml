@@ -1,0 +1,80 @@
+title: 代码真香博客
+locale: zh-CN
+email: biezhi.me@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  这里是「代码真香」的博客。
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+logo: "/assets/images/logo.png"
+
+paginate: 10  # amount of posts to show per page
+paginate_path: /page:num/
+
+date_format: "%Y-%m-%d"
+
+read_time: true
+words_per_minute: 200
+
+google_fonts:
+  - name: "Source Sans Pro"
+    weights: "400,400i,700,700i"
+  - name: "Lora"
+    weights: "400,400i,700,700i"
+google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
+disqus:
+  shortname: # Disqus shortname, e.g. "my_disqus_shortname"
+twitter:
+  username: mmistakes # site's Twitter username
+
+# Liquid
+liquid:
+  error_mode: strict
+
+# Build settings
+markdown: kramdown
+# theme: minima
+theme: jekyll-theme-so-simple
+feed:
+  path: atom.xml
+
+# Search
+search_full_content: false
+
+# Taxonomy pages
+category_archive_path: "/categories/#"
+tag_archive_path: "/tags/#"
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+
+# Front Matter Defaults
+defaults:
+  # Post defaults
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      comments: true
+      share: true
+
+# Footer Links
+footer_links:
+  - title: Twitter
+    url: https://twitter.com/codesofun
+    icon: fab fa-twitter-square
+  - title: Telegram
+    url: https://t.me/codesofun
+    icon: fab fa-telegram
+  - title: GitHub
+    url: https://github.com/biezhi
+    icon: fab fa-github-square
+  - title: Youtube
+    url: https://www.youtube.com/channel/UCmlhPmTdqYhRWwWZWSIBwGw
+    icon: fab fa-youtube
+  - title: Feed
+    url: atom.xml
+    icon: fas fa-rss-square
