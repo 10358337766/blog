@@ -11,7 +11,7 @@ Nginx 是世界上最受欢迎的 Web 服务器之一，负责托管互联网上
 
 # 先决条件
 
-在开始阅读本文之前，你应该有一个非 `root` 用户（当然 root 也是可以的）。你可以按照我们的 Ubuntu 16.04 初始服务器设置指南了解如何配置常规用户。
+在开始阅读本文之前，你应该有一个非 `root` 用户（当然 root 也是可以的）。你可以参考 [安装 Ubuntu 后要做的设置](https://blog.codesofun.com/initial-server-setup-with-ubuntu.html) 了解如何配置普通用户。
 
 如果你有可用的帐户，尽可能使用非 root 用户身份来登录。
 
@@ -169,3 +169,7 @@ sudo systemctl enable nginx
 
 - `/var/log/nginx/access.log`：除非你修改了 Nginx 配置，否则 nginx 的每次请求都会记录在该日止文件中。
 - `/var/log/nginx/error.log`：所有的 nginx 错误都会记录在这里。
+
+# 视频版教程
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ee5el0ZwX_4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

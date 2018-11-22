@@ -80,3 +80,7 @@ http://SERVER_DOMAIN_NAME_OR_IP
 - Nginx 主配置文件：`/etc/nginx/nginx.conf`。
 - 可以在 `/etc/nginx/conf.d` 中添加 server （虚拟主机）配置。
 - 默认欢迎页面目录：`/usr/share/nginx/html`。
+
+# 视频版教程
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ee5el0ZwX_4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
