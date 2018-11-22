@@ -6,6 +6,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 logo: "/assets/images/logo.png"
+permalink: /:title.html
 
 paginate: 10  # amount of posts to show per page
 paginate_path: /page:num/
@@ -32,7 +33,10 @@ liquid:
 
 # Build settings
 markdown: kramdown
-# theme: minima
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  
 theme: jekyll-theme-so-simple
 feed:
   path: atom.xml
@@ -60,6 +64,20 @@ defaults:
       layout: post
       comments: true
       share: true
+
+# Site Author
+author:
+  name: biezhi
+  picture: /assets/images/biezhi.jpeg
+  email:
+  twitter: biezhii
+  links:
+    - title: Twitter
+      url: https://twitter.com/biezhii
+      icon: fab fa-twitter-square
+    - title: GitHub
+      url: https://github.com/biezhi
+      icon: fab fa-github-square
 
 # Footer Links
 footer_links:
