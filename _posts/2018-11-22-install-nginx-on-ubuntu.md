@@ -5,8 +5,6 @@ categories: ["linux"]
 tags: ["ubuntu", "nginx"]
 ---
 
-# 介绍
-
 Nginx 是世界上最受欢迎的 Web 服务器之一，负责托管互联网上一些规模最大、流量最高的网站。在大多数情况下，它比 Apache 的资源利用率更高，可以用作 Web 服务器或反向代理。
 
 在本文中，我们将介绍如何在 `Ubuntu 16.04` 服务器上安装 Nginx。

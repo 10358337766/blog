@@ -5,8 +5,6 @@ categories: ["linux"]
 tags: ["ubuntu"]
 ---
 
-# 简介
-
 我们第一次安装好 Ubuntu 服务器后应该做一些基本的设置，保证服务器的安全性和可用性。
 
 # 第一步 - Root 登录
