@@ -9,7 +9,7 @@ logo: "/assets/images/logo.png"
 permalink: /:title.html
 
 paginate: 10  # amount of posts to show per page
-paginate_path: /page:num/
+paginate_path: /page:num.html
 
 date_format: "%Y-%m-%d"
 
