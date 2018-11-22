@@ -1,8 +1,8 @@
-title: 代码真香博客
+title: 代码真香
 locale: zh-CN
 email: biezhi.me@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  这里是「代码真香」的博客。
+  欢迎来到「代码真香」技术博客。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 logo: "/assets/images/logo.png"
@@ -38,7 +38,6 @@ kramdown:
   syntax_highlighter: rouge
 
 remote_theme: "mmistakes/so-simple-theme"
-# theme: jekyll-theme-so-simple
 feed:
   path: atom.xml
 
