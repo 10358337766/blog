@@ -36,8 +36,9 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-  
-theme: jekyll-theme-so-simple
+
+remote_theme: "mmistakes/so-simple-theme"
+# theme: jekyll-theme-so-simple
 feed:
   path: atom.xml
 

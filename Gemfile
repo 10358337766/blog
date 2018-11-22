@@ -8,7 +8,8 @@ source "https://gems.ruby-china.com"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.8.5"
+# gem "jekyll", "~> 3.8.5"
+gem "jekyll", "~> 3.6"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "jekyll-theme-so-simple"
@@ -19,7 +20,7 @@ gem "jekyll-theme-so-simple"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  # gem "github-pages"
+  gem "github-pages"
   gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jekyll-feed"
