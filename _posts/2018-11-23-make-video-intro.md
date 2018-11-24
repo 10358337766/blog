@@ -17,9 +17,9 @@ tags: ["剪辑", "youtube"]
 
 ## 第一步：安装 sony vegas
 
-- [点击此处]() 下载我们准备好的 vegas 软件
+- [点击此处](https://share.weiyun.com/5fhLx5G){:target="_blank"} 下载我们准备好的 vegas 软件
 
-> 该软件来自贴吧一大神制作，如果你已经有的话也可以使用自己的进行下一步，该版本是 sony vegas pro 15 汉化版。
+> 访问密码：codesofun 该软件来自贴吧一大神制作，如果你已经有的话也可以使用自己的进行下一步，该版本是 sony vegas pro 15 汉化版。
 
 下载完成后使用管理员方式安装即可。
 
@@ -45,8 +45,8 @@ tags: ["剪辑", "youtube"]
 
 安装字体这一步是可选的，博主建议大家都安装一下字体。要制作精美的视频片头一定要准备漂亮的字体，很多时候「宋体」并不适合你的视频，而「微软雅黑」是有版权的。所以这里给大家准备了一些免费商用的字体下载使用：
 
-- [200 款免费商用中文字体](https://www.uisdc.com/200-models-free-commercial-fonts)
-- [22款国际范英文字体](https://www.uisdc.com/22-fresh-fonts-for-designers)
+- [200 款免费商用中文字体](https://www.uisdc.com/200-models-free-commercial-fonts){:target="_blank"}
+- [22款国际范英文字体](https://www.uisdc.com/22-fresh-fonts-for-designers){:target="_blank"}
 
 这是优设这个网站下的素材，进去后你可以预览到所有字体，网站中也有下载链接，大家自行下载即可。
 
@@ -76,6 +76,10 @@ tags: ["剪辑", "youtube"]
 
 > 根据博主经验，下载起来并不是特别简单，下面我给出几个我已经下载好的样本大家可以直接使用。
 > 下载的操作方式可参考底部视频说明。
+
+- [我自己在用的](https://share.weiyun.com/5gkuKrj){:target="_blank"}
+- [Intro #282](https://share.weiyun.com/5DoRVMS){:target="_blank"}
+- [Intro #109](https://share.weiyun.com/5NcemgN){:target="_blank"}
 
 ## 第四步：编辑视频
 
@@ -123,4 +127,4 @@ tags: ["剪辑", "youtube"]
 
 # 视频版教程
 
-<iframe width="680" height="415" src="https://www.youtube.com/embed/Ee5el0ZwX_4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="680" height="415" src="https://www.youtube.com/embed/KK-MY9MjlJI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
