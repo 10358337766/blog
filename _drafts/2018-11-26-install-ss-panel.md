@@ -63,6 +63,12 @@ chown -R www:www storage
 导入数据库，创建数据库 `ss` 导入 [glzjin_all.sql](https://github.com/NimaQu/ss-panel-v3-mod_Uim/blob/dev/sql/glzjin_all.sql)
 
 
+```shell
+30 22 * * * php /data/wwwroot/ss.2333.blog/xcat sendDiaryMail
+0 0 * * * php -n /data/wwwroot/ss.2333.blog/xcat dailyjob
+*/1 * * * * php /data/wwwroot/ss.2333.blog/xcat checkjob
+*/1 * * * * php /data/wwwroot/ss.2333.blog/xcat syncnode
+```
 
 # 安装 sspanel 后端
 
