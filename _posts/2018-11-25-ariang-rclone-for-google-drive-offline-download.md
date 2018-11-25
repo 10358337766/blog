@@ -1,26 +1,52 @@
 ---
 layout: post
-title:  AriaNg + Google Drive 实现离线下载
+title:  AriaNg + rclone 实现 Google Drive 离线下载
 categories: ["vps"]
 tags: ["aria2", "下载"]
 ---
 
-有朋友发邮件咨询如何搭建 Google Drive 的离线下载，这样的需求一般是因为我们的 VPS 硬盘容量有限，而老司机们的资源是非常多的。。。所以一般采取的思路是将资源通过 VPS 下载后上传到云存储，但普通的下载肯定不行啊，速度跟不上、可下载的格式也有限，下面我们介绍非常实用的方式搞定这一切。
+有朋友发邮件咨询如何搭建 Google Drive 的离线下载，这样的需求一般是因为我们的 VPS 硬盘容量有限，而老司机们的资源是非常多的。。。所以一般采取的思路是将资源通过 VPS 下载后上传到云存储，普通的下载肯定不行啊，速度跟不上、可下载的格式也有限，下面我们介绍非常实用的方式搞定这一切。
+
+我们会涉及到以下软件：
+
+- aria2：用于下载资源
+- ariaNg：用于提供 Web 界面操作，这步使用 nginx 或其他 web 服务器都可以。
+- rclone：用于将 VPS 的文件同步到 Google Drive
 
 本文介绍的是在 Google Drive 上操作，当然在 OneDrive 也是可以的，至于怎么撸 Google Drive 无限空间这个博主不做介绍，请自行搜索。
 
 # 准备环境
 
-- 一台 vps 主机，Ubuntu、CentOS 都可以
+- 一台 vps 主机，博主使用 CentOS 进行演示
 - 内存 >= 512MB
-- 硬盘最好 >= 10G
 - KVM 架构
+- 硬盘最好 >= 10G
+
+更新系统并安装必须组件，此处安装 nginx web 服务器。
+
+```shell
+yum -y update
+yum -y install epel-release
+yum -y install wget git unzip gcc gcc-c++ openssl-devel nginx
+```
+
+启动 nginx 并设置开机自启
+
+```shell
+systemctl start nginx
+systemctl enable nginx.service
+systemctl stop firewalld # 关闭防火墙
+```
+
+这个时候可以访问服务器的外网 IP 查看 nginx 启动成功。
 
 # 安装 AriaNg
 
-Aria2是一个命令行下运行、多协议、多来源下载工具，支持磁力链接、BT种子、HTTP、FTP等下载协议，当然因为它是命令行下载工具，所以我们想下载一个东西还需要去敲命令自然是不方便，于是就有一些人根据Aria2的API开发了一些在线管理面板，可以直接在网页上面添加管理任务。
-
 ## 安装 aria2
+
+Aria2 是一个命令行下运行、多协议、多来源下载工具，支持磁力链接、BT 种子、HTTP、FTP 等下载协议，当然因为它是命令行下载工具，所以我们想下载一个东西还需要去敲命令自然是不方便，于是就有一些人根据 Aria2 的 API 开发了一些在线管理面板，可以直接在网页上面添加管理任务。
+
+---
 
 先安装 aria2 服务端，使用逗比大佬的脚本
 
@@ -55,40 +81,83 @@ Aria2 一键安装管理脚本 [vx.x.x]
 请输入数字 [0-10]:
 ```
 
-安装成功后配置文件在 `/root/.aria2/aria2.conf`，内容项：
+安装成功后配置文件在 `/root/.aria2/aria2.conf`，几个比较重要的配置：
 
 ```shell
+# aria2 下载文件后所在目录
 dir=/usr/local/caddy/www/aria2/Download
+# aria2 RPC 监听端口
 rpc-listen-port=6800
+# aria2 RPC 秘钥
 rpc-secret=codesofun
+# 下载成功后执行的脚本
+on-download-complete=/root/rcloneupload.sh
+```
+
+将下载目录修改为 `/data/Download`
+
+```shell
+mkdir -p /data/Download
 ```
 
 **其他操作**
 
-- 启动：/etc/init.d/aria2 start
-- 停止：/etc/init.d/aria2 stop
-- 重启：/etc/init.d/aria2 restart
-- 查看状态：/etc/init.d/aria2 status
-- 配置文件：/root/.aria2/aria2.conf （配置文件包含中文注释，但是一些系统可能不支持显示中文）
+- 启动：`/etc/init.d/aria2 start`
+- 停止：`/etc/init.d/aria2 stop`
+- 重启：`/etc/init.d/aria2 restart`
+- 查看状态：`/etc/init.d/aria2 status`
+- 配置文件：`/root/.aria2/aria2.conf` （配置文件包含中文注释，但是一些系统可能不支持显示中文）
 - 令牌密匙：随机生成（可以自己修改配置文件）
-- 下载目录：/usr/local/caddy/www/aria2/Download
+- 下载目录：`/data/Download`
 
 ## 安装 AriaNg
 
-AriaNg是一个前端(HTML+JS静态)控制面板，不需要和 Aria2(后端/服务端)放在一个服务器或者设备中，你甚至可以只在服务器上面搭建Aria2后端，然后访问别人建好的 AriaNg前端面板，也可以远程操作Aria2后端！
+AriaNg 是一个前端(HTML+JS静态)控制面板，不需要和 Aria2 (后端/服务端)放在一个服务器或者设备中，你甚至可以只在服务器上面搭建 Aria2 后端，然后访问别人建好的 AriaNg 前端面板，也可以远程操作 Aria2 后端！
 
-Github 源码地址：https://github.com/mayswind/AriaNg
+Github 源码地址：[https://github.com/mayswind/AriaNg](https://github.com/mayswind/AriaNg)
 
-不需要和 Aria2(后端/服务端)放在一个服务器或者设备中，你甚至可以只在服务器上面搭建 Aria2 后端，然后访问别人建好的 AriaNg 前端面板，也可以远程操作 Aria2 后端！
+不需要和 Aria2 (后端/服务端)放在一个服务器或者设备中，你甚至可以只在服务器上面搭建 Aria2 后端，然后访问别人建好的 AriaNg 前端面板，也可以远程操作 Aria2 后端！
 
-这里安装 Nginx Web 服务器，安装方式参考：
-
-- []()
-- []()
+**下载 AriaNg**
 
 ```shell
-wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/caddy_install.sh && chmod +x caddy_install.sh && bash caddy_install.sh install http.filemanager
+mkdir -p /data/www/ariang
+cd /data/www/ariang
+wget https://github.com/mayswind/AriaNg-DailyBuild/archive/master.zip && unzip master.zip
+mv AriaNg-DailyBuild-master/* .
+rm -rf master.zip AriaNg-DailyBuild-master
 ```
+
+**配置 Nginx 虚拟主机**
+
+```shell
+cd /etc/nginx/conf.d
+touch ariang.conf
+```
+
+nginx 配置
+
+```nginx
+server {
+    listen 80;
+    server_name <IP_ADDRESS>;
+
+    location / {
+        root   /data/www/ariang;
+        index  index.html index.htm;
+    }
+}
+```
+
+> 这个时候也可以使用 `nginx -t` 测试一下配置文件是否修改正确
+
+重新加载 nginx 配置
+
+```shell
+systemctl reload nginx
+```
+
+访问 `http://IP_HOST` 即可看到 ariaNg 效果。
 
 # 配置 Google Drive
 
@@ -218,9 +287,9 @@ Use auto config?
 y) Yes
 n) No
 y/n> n
-If your browser doesn't open automatically go to the following link: https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=202264815644.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&state=0fbdd9de765facd73e06e605a3b00e23
+If your browser doesn't open automatically go to the following link: https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=202264815644.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&state=0fbdd**********************05a3b00e23
 Log in and authorize rclone for access
-Enter verification code> 4/oACeTswSxMqE2wPveA0h9MAIHEBRDc2HtEhEVX_yBcr--iTAFJ7-fPg
+Enter verification code> 4/owSACseTxM*************c2HtEVX_yEhBcr--JiFTA7-Pfg
 
 Configure this as a team drive?
 y) Yes
@@ -259,7 +328,7 @@ e/n/d/r/c/s/q> q
 # 新建本地文件夹，路径自己定
 mkdir -p /data/GoogleDrive
 
-#挂载为磁盘
+# 挂载为磁盘
 rclone mount codesofun:share /data/GoogleDrive --allow-other --allow-non-empty --vfs-cache-mode writes &
 
 #格式为[name]:[google drive dir] [mount dir]
@@ -289,18 +358,119 @@ codesofun:share   15G  3.8G   12G  26% /data/GoogleDrive
 设置开机自动挂载谷歌云
 
 ```shell
-wget http://ctnmb.com/dl/rcloned && vim rcloned
+wget https://blog.codesofun.com/scripts/rcloned && vim rcloned
 #然后修改文件内如下内容
 NAME=""  #[name]
 REMOTE=''  #[google drive dir]
 LOCAL=''  #[mount dir]
 ```
 
+设置自启动
+
 ```shell
 mv rcloned /etc/init.d/rcloned
 chmod +x /etc/init.d/rcloned
 vim /etc/rc.d/rc.local #在末尾加入 bash /etc/init.d/rcloned start
 chmod +x /etc/rc.d/rc.local
+
+bash /etc/init.d/rcloned status
+```
+
+这时候可以在 VPS 上测试一下了！
+
+```shell
+cd /data/GoogleDrive
+touch codesofun.txt
+```
+
+在 Google Drive 刷新看看
+
+# 整合 Aria2 + Rclone
+
+这个时候我们使用 aria2 去下载文件，下载成功后触发一个脚本让它将文件移动到 Rclone 同步的文件夹内，这样在 Google Drive 就会自动有这个文件啦。
+
+新建一个名为 `rcloneupload.sh` 的脚本。
+
+```shell
+vim /root/rcloneupload.sh
+```
+
+将以下内容复制进去
+
+```shell
+#!/bin/bash
+
+GID="$1";
+FileNum="$2";
+File="$3";
+MinSize="5"  #限制最低上传大小，默认5k
+MaxSize="157286400"  #限制最高文件大小(单位k)，默认15G
+RemoteDIR="/data/GoogleDrive/";  #rclone挂载的本地文件夹，最后面保留/
+LocalDIR="/data/Download/";  #Aria2下载目录，最后面保留/
+
+if [[ -z $(echo "$FileNum" |grep -o '[0-9]*' |head -n1) ]]; then FileNum='0'; fi
+if [[ "$FileNum" -le '0' ]]; then exit 0; fi
+if [[ "$#" != '3' ]]; then exit 0; fi
+
+function LoadFile(){
+  IFS_BAK=$IFS
+  IFS=$'\n'
+  if [[ ! -d "$LocalDIR" ]]; then return; fi
+  if [[ -e "$File" ]]; then
+    FileLoad="${File/#$LocalDIR}"
+    while true
+      do
+        if [[ "$FileLoad" == '/' ]]; then return; fi
+        echo "$FileLoad" |grep -q '/';
+        if [[ "$?" == "0" ]]; then
+          FileLoad=$(dirname "$FileLoad");
+        else
+          break;
+        fi;
+      done;
+    if [[ "$FileLoad" == "$LocalDIR" ]]; then return; fi
+    EXEC="$(command -v mv)"
+    if [[ -z "$EXEC" ]]; then return; fi
+    Option=" -f";
+    cd "$LocalDIR";
+    if [[ -e "$FileLoad" ]]; then
+      ItemSize=$(du -s "$FileLoad" |cut -f1 |grep -o '[0-9]*' |head -n1)
+      if [[ -z "$ItemSize" ]]; then return; fi
+      if [[ "$ItemSize" -le "$MinSize" ]]; then
+        echo -ne "\033[33m$FileLoad \033[0mtoo small to spik.\n";
+        return;
+      fi
+      if [[ "$ItemSize" -ge "$MaxSize" ]]; then
+        echo -ne "\033[33m$FileLoad \033[0mtoo large to spik.\n";
+        return;
+      fi
+      eval "${EXEC}${Option}" \'"${FileLoad}"\' "${RemoteDIR}";
+      if [[ $? == '0' ]]; then
+        rm -rf "$FileLoad";
+      fi
+    fi
+  fi
+  IFS=$IFS_BAK
+}
+LoadFile;
+```
+
+保存后给予执行权限
+
+```shell
+chmod +x /root/rcloneupload.sh
+```
+
+然后再到 Aria2 配置文件中加上一行 `on-download-complete=/root/rcloneupload.sh` 即可，后面为脚本的路径。重启 Aria2 生效。
+
+```shell
+vim /root/.aria2/aria2.conf
+
+on-download-complete=/root/rcloneupload.sh
+```
+
+```shell
+/etc/init.d/aria2 restart
 ```
 
 # 请开始你的表演
