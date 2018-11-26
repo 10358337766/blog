@@ -21,6 +21,7 @@ tags: ["aria2", "下载"]
 - 内存 >= 512MB
 - KVM 架构
 - 硬盘最好 >= 10G
+- 一个谷歌 Drive 账号
 
 更新系统并安装必须组件，此处安装 nginx web 服务器。
 
@@ -158,6 +159,8 @@ systemctl reload nginx
 ```
 
 访问 `http://IP_HOST` 即可看到 ariaNg 效果。
+
+![](/assets/images/2018/11/ariang.png)
 
 # 配置 Google Drive
 
@@ -475,3 +478,8 @@ on-download-complete=/root/rcloneupload.sh
 
 # 请开始你的表演
 
+![](/assets/images/2018/11/rclone_google_drive.png)
+
+# 视频版教程
+
+<iframe width="680" height="415" src="https://www.youtube.com/embed/whAAyKd58gg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
