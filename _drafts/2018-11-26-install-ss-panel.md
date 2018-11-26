@@ -70,7 +70,14 @@ chown -R www:www storage
 */1 * * * * php /data/wwwroot/ss.2333.blog/xcat syncnode
 ```
 
-# 安装 sspanel 后端
+# 配置 sspanel 后端
+
+注意填写格式
+
+```shell
+美国 VIP节点1 - 10G带宽
+香港 普通节点1 - 100M带宽
+```
 
 ```shell
 yum -y install vim git python-devel libffi-devel openssl-devel python-setuptools && easy_install pip
@@ -112,3 +119,8 @@ API_INTERFACE = 'glzjinmod'
 ```
 
 # 走你
+
+# 参考资料
+
+- [SS-Panel魔改面板.config.php文件详解](https://blog.ccswust.org/3959.html)
+- [详细安装ss-panel-v3魔改版前端+后端教程](https://www.gblm.net/487.html)
