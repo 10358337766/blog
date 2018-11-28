@@ -5,7 +5,7 @@ categories: ["vps"]
 tags: ["rclone", "离线下载"]
 ---
 
-在发布了 [Aria2 + rclone 实现 Google Drive 离线下载](https://www.youtube.com/watch?v=whAAyKd58gg) 视频后发现很多朋友遇到了一些问题，博主在演示的时候也忽略了 VPS 上的文件未删除占用磁盘问题，在评论中看到有位叫 `@陈潮潮` 的网友给出一个不错的思路，在本文中我将优化它们。
+在发布了 [Aria2 + rclone 实现 Google Drive 离线下载](https://www.youtube.com/watch?v=whAAyKd58gg){:target="_blank"} 视频后发现很多朋友遇到了一些问题，博主在演示的时候也忽略了 VPS 上的文件未删除占用磁盘问题，在评论中看到有位叫 `@陈潮潮` 的网友给出一个不错的思路，在本文中我将优化它们。
 
 # 什么问题？
 
@@ -102,7 +102,7 @@ done
 
 在评论中还看到很多朋友出了一些问题，这里我们列出一些常见问题如何解决。
 
-**如何实现多个网盘之间文件拷贝？**
+## 如何实现多个网盘之间文件拷贝？
 
 我们使用 `rclone config` 可以创建一个名为 `codesofun` 的配置，当然也能创建多个，你需要再创建第二个网盘的配置，即便是 Google Drive 同步到 OneDrive 也是可以的，假设第二个名字为 `hello`。
 
@@ -115,7 +115,21 @@ done
 
 如果文件比较多或者较大的话建议使用 `screen` 命令开启一个会话执行，这里使用 `share` 目录的原因是一个习惯而已，不加目录就是整个网盘咯。
 
-**AriaNg 一直连接不成功**
+## 浏览器访问 ip 出现 403
+
+原因可能有 3 种
+
+**权限不够**
+
+解决方法 `chmod -R 755 /data/www`
+
+**开启了 SELinux**
+
+使用 `/usr/sbin/sestatus -v` 查看是否开启，输出 `enable` 则为开启。
+
+解决方法 修改 `/etc/selinux/config` 将 `SELINUX=enforcing` 改为 `SELINUX=disabled`，然后使用 `reboot` 重启系统。
+
+## AriaNg 一直连接不成功
 
 AriaNg 是一个网页程序，它的配置主要是 RPC 相关的，这配置里也就是一个 IP、端口和密钥。
 
@@ -151,11 +165,11 @@ telnet: Unable to connect to remote host
 systemctl stop firewalld
 ```
 
-**Mac 怎么安装使用 aria2 本地下载？**
+## Mac 怎么安装使用 aria2 本地下载？
 
-下载 [AriaNg Native](https://github.com/mayswind/AriaNg-Native/releases) 这个工具，然后配置 RPC 密钥即可。
+下载 [AriaNg Native](https://github.com/mayswind/AriaNg-Native/releases){:target="_blank"} 这个工具，然后配置 RPC 密钥即可。
 
 # 参考资料
 
-- [Rclone: 超好用的网盘 / VPS 数据同步、备份工具](https://www.zrj96.com/post-520.html)
-- [aria2 完美配置](https://github.com/P3TERX/aria2_perfect_config)
+- [Rclone: 超好用的网盘 / VPS 数据同步、备份工具](https://www.zrj96.com/post-520.html){:target="_blank"}
+- [aria2 完美配置](https://github.com/P3TERX/aria2_perfect_config){:target="_blank"}
