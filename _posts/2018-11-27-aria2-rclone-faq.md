@@ -171,7 +171,7 @@ systemctl stop firewalld
 
 # 视频版教程
 
-<iframe width="680" height="415" src="https://www.youtube.com/embed/whAAyKd58gg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="680" height="415" src="https://www.youtube.com/embed/xaZUNyHlorc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # 参考资料
 
