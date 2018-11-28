@@ -167,7 +167,11 @@ systemctl stop firewalld
 
 ## Mac 怎么安装使用 aria2 本地下载？
 
-下载 [AriaNg Native](https://github.com/mayswind/AriaNg-Native/releases){:target="_blank"} 这个工具，然后配置 RPC 密钥即可。
+下载 [aria2gui](https://github.com/yangshun1029/aria2gui){:target="_blank"} 配合插件使用即可，可参考使用说明。
+
+# 视频版教程
+
+<iframe width="680" height="415" src="https://www.youtube.com/embed/whAAyKd58gg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # 参考资料
 
