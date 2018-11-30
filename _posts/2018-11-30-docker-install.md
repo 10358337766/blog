@@ -131,4 +131,4 @@ sudo rm -rf /var/lib/docker
 
 # 参考资料
 
-- [Docker Docs](https://docs.docker.com/install/)
+- [Docker Docs](https://docs.docker.com/install/){:target="_blank"}
