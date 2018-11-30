@@ -11,24 +11,24 @@ Docker 在 Windows、Linux、Mac 下的安装。
 
 ## Windows 7
 
-在 Win7 系统安装 Docker 需要使用 [docker toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/)。
+在 Win7 系统安装 Docker 需要使用 [docker toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/){:target="_blank"}。
 
 Docker Toolbox 包括以下 Docker 工具：
 
-- Docker CLI：客户端，用于运行Docker Engine以创建映像和容器
+- Docker CLI：客户端，用于运行 Docker Engine 以创建映像和容器
 - Docker Machine：你可以从 Windows 终端运行 Docker Engine 命令
 - Docker Compose：用于运行 `docker-compose` 命令
 - Kitematic：Docker GUI
-- 为 Docker 命令行环境预配置的Docker QuickStart shell
-- Oracle VM VirtualBox
+- 为 Docker 命令行环境预配置的 `Docker QuickStart shell`
+- `Oracle VM VirtualBox`
 
 ## Windows 10
 
-下载 [Docker CE for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows) 双击运行即可。
+下载 [Docker CE for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows){:target="_blank"} 双击运行即可。
 
 # 在 Mac 安装 Docker
 
-下载 [Docker CE for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac) 双击运行即可。
+下载 [Docker CE for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac){:target="_blank"} 双击运行即可。
 
 # 在 Linux 安装 Docker
 
@@ -128,3 +128,7 @@ sudo rm -rf /var/lib/docker
 ```
 
 你需要手动删除任何已编辑的配置文件。
+
+# 参考资料
+
+- [Docker Docs](https://docs.docker.com/install/)
